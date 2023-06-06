@@ -454,7 +454,7 @@ void logic(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
     }
     else if (C_FUNC() || c_FUNC()){
         { 
-            int temp = state->queue[0];
+            int temp = state->queue[1];
             state->queue[0] = state->queue[1];
             state->queue[1] = temp;
         }
