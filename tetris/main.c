@@ -25,7 +25,7 @@
 
 #define CANVAS_WIDTH 10
 #define CANVAS_HEIGHT 20
-
+int x = 150;
 typedef enum {
     RED = 41,
     GREEN,
@@ -362,7 +362,7 @@ void printCanvas(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
         }
         printf("\033[0m|\n");
     }
-    printf("\033[%d;%dHLine: %d",0, 2, state->score);
+    printf("\033[%d;%dH Score: %d",15, CANVAS_WIDTH * 2 + 4, state->score*10);
     Shape shapeData = shapes[state->queue[1]];
     printf("\033[%d;%dHNext:", 3, CANVAS_WIDTH * 2 + 5);
     for (int i = 1; i <= 3; i++)
@@ -453,7 +453,7 @@ void logic(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
         state->fallTime += FALL_DELAY * CANVAS_HEIGHT;
     }
     else if (C_FUNC() || c_FUNC()){
-        { 
+        {
             int temp = state->queue[0];
             state->queue[0] = state->queue[1];
             state->queue[1] = temp;
@@ -482,7 +482,7 @@ void logic(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
 
             if (!move(canvas, state->x, state->y, state->rotate, state->x, state->y, state->rotate, state->queue[0]))
             {
-                printf("\033[%d;%dH\x1b[41m GAME OVER \x1b[0m\033[%d;%dH", CANVAS_HEIGHT - 3, CANVAS_WIDTH * 2 + 5, CANVAS_HEIGHT + 5, 0);
+                printf("\033[%d;;%dH", CANVAS_HEIGHT - 3, CANVAS_WIDTH * 2 + 5);
                 printf("\033[1;31m"); // 設置文字顏色為紅色
                 printf("  ________    _____      _____  ___________ ____________   _________________________ \n");
                 printf(" /  _____/   /  _  \\    /     \\ \\_   _____/ \\_____  \\   \\ /   /\\_   _____/\\______   \\\n");
@@ -532,7 +532,7 @@ int main()
     {
         logic(canvas, &state);
         printCanvas(canvas, &state);
-        Sleep(100);
+        Sleep(x);
     }
 
 }
