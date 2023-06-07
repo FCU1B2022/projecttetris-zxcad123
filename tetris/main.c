@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
@@ -362,7 +362,7 @@ void printCanvas(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
         }
         printf("\033[0m|\n");
     }
-
+    printf("\033[%d;%dHLine: %d",0, 2, state->score);
     Shape shapeData = shapes[state->queue[1]];
     printf("\033[%d;%dHNext:", 3, CANVAS_WIDTH * 2 + 5);
     for (int i = 1; i <= 3; i++)
@@ -483,6 +483,14 @@ void logic(Block canvas[CANVAS_HEIGHT][CANVAS_WIDTH], State* state)
             if (!move(canvas, state->x, state->y, state->rotate, state->x, state->y, state->rotate, state->queue[0]))
             {
                 printf("\033[%d;%dH\x1b[41m GAME OVER \x1b[0m\033[%d;%dH", CANVAS_HEIGHT - 3, CANVAS_WIDTH * 2 + 5, CANVAS_HEIGHT + 5, 0);
+                printf("\033[1;31m"); // 設置文字顏色為紅色
+                printf("  ________    _____      _____  ___________ ____________   _________________________ \n");
+                printf(" /  _____/   /  _  \\    /     \\ \\_   _____/ \\_____  \\   \\ /   /\\_   _____/\\______   \\\n");
+                printf("/   \\  ___  /  /_\\  \\  /  \\ /  \\ |    __)_   /   |   \\   Y   /  |    __)_  |       _/\n");
+                printf("\\    \\_\\  \\/    |    \\/    Y    \\|        \\ /    |    \\     /   |        \\ |    |   \\\n");
+                printf(" \\______  /\\____|__  /\\____|__  /_______  / \\_______  /\\___/   /_______  / |____|_  / \n");
+                printf("        \\/         \\/         \\/        \\/          \\/                 \\/         \\/ \n");
+                printf("\033[0m"); // 重置文字顏色
                 exit(0);
             }
         }
